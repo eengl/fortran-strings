@@ -1,10 +1,13 @@
-all:	test.x
+all:	MODULE libfstrings.a libfstrings.so
 
-strings.mod strings.o:	strings.f90
-	$(FC) -c $^
+MODULE:	strings.f90
+	$(FC) -g -fbacktrace -c $^
 
-test.x:	test.f90 strings.o
-	$(FC) -o $@ $^
+libfstrings.a: strings.o
+	$(AR) -ruv $@ $^
+
+libfstrings.so: strings.o
+	$(FC) -I. -fPIC -shared -o $@ $^
 
 clean:
-	-rm -f strings.mod strings.o test.o test.x
+	-rm -f strings.mod strings.o libfstrings.a libfstrings.so
