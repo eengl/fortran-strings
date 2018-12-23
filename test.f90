@@ -4,7 +4,7 @@ program test
    
    character(len=:), allocatable :: mystring
 
-   mystring="My name is Eric Engle. Eric is awesome."
+   mystring="My name is Tony Starrk. Tony is awesome."
    print *,"MYSTRING = ",mystring
    print *,"COUNT OF SPACES = ",str_count(mystring,"Eric")
 
@@ -18,5 +18,9 @@ program test
    print *,"STR_SPLIT = ",str_split(mystring,",",4)
    print *,"STR_SPLIT = ",str_split(mystring,",",0)
    print *,"STR_SPLIT = ",str_split(mystring,"!",3)
+
+   mystring=",eric,eric,gina,naomi,tony,,,gina,tony,naomi,eric,gina,,,"
+   print *,"MYSTRING = ",mystring
+   print *,"STR_UNIQ = ",str_uniq(mystring,",")
 
 end program test

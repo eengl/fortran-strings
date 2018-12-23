@@ -9,5 +9,11 @@ libfstrings.a:	strings.o
 libfstrings.so:	strings.o
 	$(FC) -I. -fPIC -shared -o $@ $^
 
+test:		test.f90 
+	$(FC) -I. -o $@ $^ -L./ -lfstrings
+
 clean:
 	-rm -f strings.mod strings.o libfstrings.a libfstrings.so
+
+cleanall:	clean
+	-rm -f test

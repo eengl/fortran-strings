@@ -105,4 +105,33 @@ module strings
       end do
    end function str_split
 
+   ! -------------------------------------------------------------------------------------
+   ! Function str_uniq
+   ! -------------------------------------------------------------------------------------
+   function str_uniq(str,delim) result(strout)
+      implicit none
+      character(len=*), intent(in) :: str
+      character(len=1), intent(in) :: delim
+      character(len=:), allocatable :: strout
+      integer :: i,ii,ncols
+      logical(kind=1), allocatable, dimension(:) :: work
+      if(allocated(work))deallocate(work)
+      ncols=str_count(str,delim)+1
+      allocate(work(ncols))
+      work(:)=.false.
+      do i=1,ncols
+         do ii=i+1,ncols
+            if(str_split(str,delim,ii).eq.str_split(str,delim,i))work(ii)=.true.
+         end do
+         if(.not.work(i))then
+            if(len_trim(strout).eq.0)then
+               strout=str_split(str,delim,i)
+            elseif(len_trim(strout).gt.0)then
+               strout=strout//delim//str_split(str,delim,i)
+            endif
+         endif
+      end do
+      if(allocated(work))deallocate(work)
+   end function str_uniq
+
 end module strings
