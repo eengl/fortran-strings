@@ -36,4 +36,8 @@ program test
    print *,"STR_CENTER = ",str_center(mystring,8,fillchar="z")
    print *,"STR_CENTER = ",":",str_center(mystring,20),":"
 
+   mystring="Eric Gina Naomi Tony"
+   print *,"MYSTRING = ",mystring
+   print *,"STR_REVERSE = ",":",str_reverse(mystring),":"
+
 end program test
