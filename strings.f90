@@ -172,4 +172,17 @@ module strings
       endif
    end function str_center
 
+   ! -------------------------------------------------------------------------------------
+   ! Function: str_reverse
+   ! -------------------------------------------------------------------------------------
+   function str_reverse(str) result(strout)
+      implicit none
+      character(len=*), intent(in) :: str
+      character(len=:), allocatable :: strout
+      integer :: i
+      do i=len(str),1,-1
+         strout=strout//str(i:i)
+      end do
+   end function str_reverse
+
 end module strings
