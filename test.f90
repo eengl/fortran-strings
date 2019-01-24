@@ -23,4 +23,17 @@ program test
    print *,"MYSTRING = ",mystring
    print *,"STR_UNIQ = ",str_uniq(mystring,",")
 
+   mystring="Eric"
+   print *,"MYSTRING = ",mystring
+   print *,"STR_ZFILL = ",str_zfill(mystring,10)
+   print *,"STR_ZFILL = ",str_zfill(mystring,2)
+
+   mystring="Gina"
+   print *,"MYSTRING = ",mystring
+   print *,"STR_CENTER = ",str_center(mystring,2)
+   print *,"STR_CENTER = ",str_center(mystring,5,fillchar="x")
+   print *,"STR_CENTER = ",str_center(mystring,7,fillchar="y")
+   print *,"STR_CENTER = ",str_center(mystring,8,fillchar="z")
+   print *,"STR_CENTER = ",":",str_center(mystring,20),":"
+
 end program test
