@@ -77,7 +77,7 @@ module strings
    end function str_lower
 
    ! -------------------------------------------------------------------------------------
-   ! Function str_split
+   ! Function: str_split
    ! -------------------------------------------------------------------------------------
    function str_split(str,delim,col) result(strout)
       implicit none
@@ -106,7 +106,7 @@ module strings
    end function str_split
 
    ! -------------------------------------------------------------------------------------
-   ! Function str_uniq
+   ! Function: str_uniq
    ! -------------------------------------------------------------------------------------
    function str_uniq(str,delim) result(strout)
       implicit none
@@ -133,5 +133,43 @@ module strings
       end do
       if(allocated(work))deallocate(work)
    end function str_uniq
+
+   ! -------------------------------------------------------------------------------------
+   ! Function: str_zfill
+   ! -------------------------------------------------------------------------------------
+   function str_zfill(str,pad) result(strout)
+      implicit none
+      character(len=*), intent(in) :: str
+      integer, intent(in) :: pad
+      character(len=:), allocatable :: strout
+      if(pad.le.len_trim(str))then
+         strout=str
+      else
+         strout=repeat("0",pad-len_trim(str))//str
+      endif
+   end function str_zfill
+
+   ! -------------------------------------------------------------------------------------
+   ! Function: str_center
+   ! -------------------------------------------------------------------------------------
+   function str_center(str,width,fillchar) result(strout)
+      implicit none
+      character(len=*), intent(in) :: str
+      integer, intent(in) :: width
+      character(len=1), intent(in), optional :: fillchar
+      character(len=:), allocatable :: strout
+      character(len=1) :: local_fillchar
+      local_fillchar=" "
+      if(present(fillchar))local_fillchar=fillchar
+      if(width.le.len_trim(str))then
+         strout=str
+      else
+         if(mod(width,2).eq.0)then
+            strout=repeat(local_fillchar,width/2)//str//repeat(local_fillchar,width/2)
+         else
+            strout=repeat(local_fillchar,(width/2)-1)//str//repeat(local_fillchar,(width/2)-2)
+         endif
+      endif
+   end function str_center
 
 end module strings
