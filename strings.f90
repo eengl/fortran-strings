@@ -4,6 +4,10 @@ module strings
    
    ! -------------------------------------------------------------------------------------
    ! Function: str_count
+   !> @brief Count the occurrences of a substring in a string.
+   !> @param[in] str - string to count from
+   !> @param[in] substr - substring to count
+   !> @return count of \b substr in \b str
    ! -------------------------------------------------------------------------------------
    function str_count(str,substr) result(count)
       implicit none
@@ -18,6 +22,11 @@ module strings
 
    ! -------------------------------------------------------------------------------------
    ! Function: str_replace
+   !> @brief Replace a substring with another substring within a parent string.
+   !> @param[in] str - string to work on
+   !> @param[in] old - string to replace
+   !> @param[in] new - string to substritute from \b old.
+   !> @return modified string where occurrences of \b old replaces with \b new
    ! -------------------------------------------------------------------------------------
    function str_replace(str,old,new) result(strout)
       implicit none
@@ -44,6 +53,9 @@ module strings
 
    ! -------------------------------------------------------------------------------------
    ! Function: str_upper
+   !> @brief Convert all letters to uppercase.
+   !> @param[in] str - string to work on
+   !> @return modified string with all letters converted to uppercase.
    ! -------------------------------------------------------------------------------------
    function str_upper(str) result(strout)
       implicit none
@@ -61,6 +73,9 @@ module strings
 
    ! -------------------------------------------------------------------------------------
    ! Function: str_lower
+   !> @brief Convert all letters to lowercase.
+   !> @param[in] str - string to work on
+   !> @return modified string with all letters converted to lowercase.
    ! -------------------------------------------------------------------------------------
    function str_lower(str) result(strout)
       implicit none
@@ -78,6 +93,12 @@ module strings
 
    ! -------------------------------------------------------------------------------------
    ! Function: str_split
+   !> @brief Split string based on a character delimiter and return string given by the
+   !>        column number.
+   !> @param[in] str - string to work on
+   !> @param[in] delim - character delimiter
+   !> @param[in] col - delimited column to return
+   !> @return string
    ! -------------------------------------------------------------------------------------
    function str_split(str,delim,col) result(strout)
       implicit none
@@ -107,6 +128,10 @@ module strings
 
    ! -------------------------------------------------------------------------------------
    ! Function: str_uniq
+   !> @brief Removed duplicative entries from a \b delimited string. 
+   !> @param[in] str - string to work on
+   !> @param[in] delim - character delimiter
+   !> @return modified string
    ! -------------------------------------------------------------------------------------
    function str_uniq(str,delim) result(strout)
       implicit none
@@ -136,21 +161,32 @@ module strings
 
    ! -------------------------------------------------------------------------------------
    ! Function: str_zfill
+   !> @brief Pad a string with zeroes ("0") to specified width. If width is <= input
+   !>        string width, then the original string is returned.
+   !> @param[in] str - string to work on
+   !> @param[in] width - width of padded string
+   !> @return modified string
    ! -------------------------------------------------------------------------------------
-   function str_zfill(str,pad) result(strout)
+   function str_zfill(str,width) result(strout)
       implicit none
       character(len=*), intent(in) :: str
-      integer, intent(in) :: pad
+      integer, intent(in) :: width
       character(len=:), allocatable :: strout
-      if(pad.le.len_trim(str))then
+      if(width.le.len_trim(str))then
          strout=str
       else
-         strout=repeat("0",pad-len_trim(str))//str
+         strout=repeat("0",width-len_trim(str))//str
       endif
    end function str_zfill
 
    ! -------------------------------------------------------------------------------------
    ! Function: str_center
+   !> @brief Center a string to a specified width.  The default character to fill in the
+   !>        centered string is a blank character.
+   !> @param[in] str - string to work on
+   !> @param[in] width - width of centered string
+   !> @param[in] fillchar - character to fill centered string. \b[OPTIONAL]
+   !> @return centered string
    ! -------------------------------------------------------------------------------------
    function str_center(str,width,fillchar) result(strout)
       implicit none
@@ -174,6 +210,9 @@ module strings
 
    ! -------------------------------------------------------------------------------------
    ! Function: str_reverse
+   !> @brief Reverse a string.
+   !> @param[in] str - string to work on
+   !> @return string reverse of \b str
    ! -------------------------------------------------------------------------------------
    function str_reverse(str) result(strout)
       implicit none
