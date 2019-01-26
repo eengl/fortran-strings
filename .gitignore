@@ -31,3 +31,6 @@
 *.out
 *.app
 *.x
+
+# Journaled file system hidden files
+.DS_Store
