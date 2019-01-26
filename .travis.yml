@@ -4,5 +4,5 @@ before_install:
   - sudo apt-get install gfortran
 
 script:
-  - make
-  - make test
+  - FC=gfortran make
+  - FC=gfortran make test
