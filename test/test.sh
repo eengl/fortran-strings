@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 set -x
 
 OS_NAME=$(uname)
