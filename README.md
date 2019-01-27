@@ -30,9 +30,13 @@ All functions return a deferred-length, allocatable character scalar (``characte
 
 Admittedly, my knowledge of automake, autotools, etc is not strong at this time.  The makefile is preconfigured to compile with GNU Fortran (gfortran) ``$FC`` and its appropriate compiler options ``$FFLAGS``.  The default install path is set to ``/usr/local`` via ``$PREFIX``.  To change these make variables, simply edit the makefile or set these variables on the command line prior to the make commands.
 
+### Build
+
 ``> [FC=... FFLAGS="..." PREFIX="..."] make``
 
-``> [sudo] [FC=... FFLAGS="..." PREFIX="..."] make`` **(sudo access required to install to system area)**
+### Install
+
+``> [sudo] [FC=... FFLAGS="..." PREFIX="..."] make install`` **(sudo access required to install to system area)**
 
 ### Test
 
