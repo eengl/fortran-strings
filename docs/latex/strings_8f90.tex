@@ -1,0 +1,28 @@
+\hypertarget{strings_8f90}{}\section{strings.\+f90 File Reference}
+\label{strings_8f90}\index{strings.f90@{strings.f90}}
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+module \mbox{\hyperlink{namespacestrings}{strings}}
+\end{DoxyCompactItemize}
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+integer function \mbox{\hyperlink{namespacestrings_a1b755da0409a70ccc4c25c1de4e7e009}{strings\+::str\+\_\+count}} (str, substr)
+\begin{DoxyCompactList}\small\item\em Count the occurrences of a substring in a string. \end{DoxyCompactList}\item 
+character(len=\+:) function, allocatable \mbox{\hyperlink{namespacestrings_a2d557ee85358067ac58c78aeda61fefc}{strings\+::str\+\_\+replace}} (str, old, new)
+\begin{DoxyCompactList}\small\item\em Replace a substring with another substring within a parent string. \end{DoxyCompactList}\item 
+character(len=\+:) function, allocatable \mbox{\hyperlink{namespacestrings_afd1c79d1ba7dfe3ca9c77cab4f936c99}{strings\+::str\+\_\+upper}} (str)
+\begin{DoxyCompactList}\small\item\em Convert all letters to uppercase. \end{DoxyCompactList}\item 
+character(len=\+:) function, allocatable \mbox{\hyperlink{namespacestrings_a9c44648f65a85e1e78b5e1c75ea67619}{strings\+::str\+\_\+lower}} (str)
+\begin{DoxyCompactList}\small\item\em Convert all letters to lowercase. \end{DoxyCompactList}\item 
+character(len=\+:) function, allocatable \mbox{\hyperlink{namespacestrings_ae0ef0af953180efc5cbda255e58e521c}{strings\+::str\+\_\+split}} (str, delim, col)
+\begin{DoxyCompactList}\small\item\em Split string based on a character delimiter and return string given by the column number. \end{DoxyCompactList}\item 
+character(len=\+:) function, allocatable \mbox{\hyperlink{namespacestrings_a8a6ee3280b88b0c63aa79b8095bd20ef}{strings\+::str\+\_\+uniq}} (str, delim)
+\begin{DoxyCompactList}\small\item\em Removed duplicative entries from a {\bfseries{delimited}} string. \end{DoxyCompactList}\item 
+character(len=\+:) function, allocatable \mbox{\hyperlink{namespacestrings_af7c5fa6249abe3060899aab8ce88686e}{strings\+::str\+\_\+zfill}} (str, width)
+\begin{DoxyCompactList}\small\item\em Pad a string with zeroes (\char`\"{}0\char`\"{}) to specified width. If width is $<$= input string width, then the original string is returned. \end{DoxyCompactList}\item 
+character(len=\+:) function, allocatable \mbox{\hyperlink{namespacestrings_a4200b0c5200b64c2c2a6ce8862e2af58}{strings\+::str\+\_\+center}} (str, width, fillchar)
+\begin{DoxyCompactList}\small\item\em Center a string to a specified width. The default character to fill in the centered string is a blank character. \end{DoxyCompactList}\item 
+character(len=\+:) function, allocatable \mbox{\hyperlink{namespacestrings_a71f27e53beff6353ceead343b10761ec}{strings\+::str\+\_\+reverse}} (str)
+\begin{DoxyCompactList}\small\item\em Reverse a string. \end{DoxyCompactList}\end{DoxyCompactItemize}
