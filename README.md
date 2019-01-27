@@ -20,6 +20,8 @@ The function names are prefixed with ``str_``.  The following is a list of avail
 * **str_center** - Center a string to a specified width.  The default character to fill in the centered string is a blank character.
 * **str_reverse** - Reverse a string.
 
+All functions return a deferred-length, allocatable character scalar (``character(len=:), allocatable``) with the exception of **``str_count``** which returns an integer.
+
 ## Requirements
 
 * Fortran compiler (tested with gfortran 4.8.4 and later)
