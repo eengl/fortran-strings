@@ -1,15 +1,20 @@
 #!/usr/bin/env bash
-set -x
+#set -x
 
 OS_NAME=$(uname)
 
+BUILD_DIR=$PWD
+TEST_DIR=$BUILD_DIR/test
+
+cd $TEST_DIR
+
 if [ "$OS_NAME" == "Darwin" ]; then
-   DYLD_LIBRARY_PATH=../:$DYLD_LIBRARY_PATH
+   export DYLD_LIBRARY_PATH="$BUILD_DIR:$DYLD_LIBRARY_PATH"
 elif [ "$OS_NAME" == "Linux" ]; then
-   LD_LIBRARY_PATH=../:$LD_LIBRARY_PATH
+   export LD_LIBRARY_PATH="$BUILD_DIR:$LD_LIBRARY_PATH"
 fi
 
-test/test_${1}.x
+./test_${1}.x
 ret=$?
 
 if [ $ret -eq 0 ]; then
