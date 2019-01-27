@@ -1,0 +1,86 @@
+\href{https://travis-ci.com/eengl/fortran-strings}{\texttt{ }}
+
+\subsection*{Introduction}
+
+fortran-\/strings is a Fortran library and module which contains functions for common string manipulations. The function ideas originate mainly from Python\textquotesingle{}s built-\/in \href{https://docs.python.org/3.7/library/stdtypes.html\#string-methods}{\texttt{ string}} functions. The functions are accessible by using {\ttfamily strings} module in your Fortran code
+
+{\ttfamily use strings}
+
+The function names are prefixed with {\ttfamily str\+\_\+}. The following is a list of available functions\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{str\+\_\+count}} -\/ Count the occurrences of a substring in a string.
+\item {\bfseries{str\+\_\+replace}} -\/ Replace a substring with another substring within a parent string.
+\item {\bfseries{str\+\_\+upper}} -\/ Convert all letters to uppercase.
+\item {\bfseries{str\+\_\+lower}} -\/ Convert all letters to lowercase.
+\item {\bfseries{str\+\_\+split}} -\/ Split string based on a character delimiter and return string given by the column number.
+\item {\bfseries{str\+\_\+uniq}} -\/ Removed duplicative entries from a delimited string.
+\item {\bfseries{str\+\_\+zfill}} -\/ Pad a string with zeroes (\char`\"{}0\char`\"{}) to specified width. If width is $<$= input string width, then the original string is returned.
+\item {\bfseries{str\+\_\+center}} -\/ Center a string to a specified width. The default character to fill in the centered string is a blank character.
+\item {\bfseries{str\+\_\+reverse}} -\/ Reverse a string.
+\end{DoxyItemize}
+
+All functions return a deferred-\/length, allocatable character scalar ({\ttfamily character(len=\+:), allocatable}) with the exception of $\ast$$\ast${\ttfamily str\+\_\+count}$\ast$$\ast$ which returns an integer.
+
+\subsection*{Requirements}
+
+
+\begin{DoxyItemize}
+\item Fortran compiler (tested with gfortran 4.\+8.\+4 and later)
+\end{DoxyItemize}
+
+\subsection*{Build and Installation}
+
+Admittedly, my knowledge of automake, autotools, etc is not strong at this time. The makefile is preconfigured to compile with G\+NU Fortran (gfortran) {\ttfamily \$\+FC} and its appropriate compiler options {\ttfamily \$\+F\+F\+L\+A\+GS}. The default install path is set to {\ttfamily /usr/local} via {\ttfamily \$\+P\+R\+E\+F\+IX}. To change these make variables, simply edit the makefile or set these variables on the command line prior to the make commands.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{[FC=... FFLAGS="..." PREFIX="..."] make \# Build}
+\DoxyCodeLine{make test \# Test}
+\DoxyCodeLine{[sudo] [FC=... FFLAGS="..." PREFIX="..."] make install \# Install (sudo access required if install to system area)}
+\end{DoxyCode}
+
+
+\subsection*{Usage}
+
+This package provides a module file ($\ast$$\ast${\ttfamily $<$prefix$>$/include/strings.mod}$\ast$$\ast$) and both a shared object library ($\ast$$\ast${\ttfamily $<$prefix$>$/lib/libfstrings.so}$\ast$$\ast$) and a static library ($\ast$$\ast${\ttfamily $<$prefix$>$/lib/libfstrings.a}$\ast$$\ast$). To use this {\ttfamily fortran-\/strings} in your Fortran program, you must use the {\ttfamily U\+SE} statement in your main program or procedure source and during compile, you must specify the library of your choice to the compiler/linker.
+
+Example code\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{program} test}
+\DoxyCodeLine{\textcolor{keywordtype}{use }\mbox{\hyperlink{namespacestrings}{strings}}}
+\DoxyCodeLine{\textcolor{keywordtype}{implicit none}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{character(len=:)}, \textcolor{keywordtype}{allocatable} :: mystring}
+\DoxyCodeLine{\textcolor{keywordtype}{integer} :: icount}
+\DoxyCodeLine{}
+\DoxyCodeLine{mystring=\textcolor{stringliteral}{"Hello World!  Hello from Fortran!"}}
+\DoxyCodeLine{icount=\mbox{\hyperlink{namespacestrings_a1b755da0409a70ccc4c25c1de4e7e009}{str\_count}}(mystring,\textcolor{stringliteral}{"Hello"}) \textcolor{comment}{! Return a count of "Hello" in mystring}}
+\DoxyCodeLine{\textcolor{keyword}{write}(6,*)\textcolor{stringliteral}{"icount = "},icount}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{end program }test}
+\end{DoxyCode}
+
+
+Example compile and link to {\itshape {\bfseries{static}}} library using gfortran\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{gfortran -I<prefix>/include -o test.x test.f90 <prefix>/lib/libfstrings.a}
+\end{DoxyCode}
+
+
+Note that this does not make the executable 100\% static.
+
+Example compile and link to {\itshape {\bfseries{shared object}}} library using gfortran\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{gfortran -I<prefix>/include -o test.x test.f90 -L<prefix>/lib -lfstrings}
+\end{DoxyCode}
+
+
+Note that when compiling and linking to shared object libraries, the library path must be specified in the appropriate environment variable prior to invocation (Linux\+: {\ttfamily L\+D\+\_\+\+L\+I\+B\+R\+A\+R\+Y\+\_\+\+P\+A\+TH}; mac\+OS\+: {\ttfamily D\+Y\+L\+D\+\_\+\+L\+I\+B\+R\+A\+R\+Y\+\_\+\+P\+A\+TH}). 

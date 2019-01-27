@@ -91,13 +91,13 @@ $(function() {
 </ul>
 <h2>Build and Installation</h2>
 <p>Admittedly, my knowledge of automake, autotools, etc is not strong at this time. The makefile is preconfigured to compile with GNU Fortran (gfortran) <code>$FC</code> and its appropriate compiler options <code>$FFLAGS</code>. The default install path is set to <code>/usr/local</code> via <code>$PREFIX</code>. To change these make variables, simply edit the makefile or set these variables on the command line prior to the make commands.</p>
-<h3>Build</h3>
-<p><code>&gt; [FC=... FFLAGS="..." PREFIX="..."] make</code></p>
-<h3>Test</h3>
-<p>Prior to <code>make install</code>, though optional, it is good practice to test the build with via</p>
-<p><code>&gt; make test</code></p>
-<h3>Install</h3>
-<p><code>&gt; [sudo] [FC=... FFLAGS="..." PREFIX="..."] make install</code> **(sudo access required to install to system area)** </p>
+<div class="fragment"><div class="line">[FC=... FFLAGS=&quot;...&quot; PREFIX=&quot;...&quot;] make # Build</div><div class="line">make test # Test</div><div class="line">[sudo] [FC=... FFLAGS=&quot;...&quot; PREFIX=&quot;...&quot;] make install # Install (sudo access required if install to system area)</div></div><!-- fragment --><h2>Usage</h2>
+<p>This package provides a module file (**<code>&lt;prefix&gt;/include/strings.mod</code>**) and both a shared object library (**<code>&lt;prefix&gt;/lib/libfstrings.so</code>**) and a static library (**<code>&lt;prefix&gt;/lib/libfstrings.a</code>**). To use this <code>fortran-strings</code> in your Fortran program, you must use the <code>USE</code> statement in your main program or procedure source and during compile, you must specify the library of your choice to the compiler/linker.</p>
+<p>Example code:</p>
+<div class="fragment"><div class="line"><span class="keyword">program</span> test</div><div class="line"><span class="keywordtype">use </span><a class="code" href="namespacestrings.html">strings</a></div><div class="line"><span class="keywordtype">implicit none</span></div><div class="line"></div><div class="line"><span class="keywordtype">character(len=:)</span>, <span class="keywordtype">allocatable</span> :: mystring</div><div class="line"><span class="keywordtype">integer</span> :: icount</div><div class="line"></div><div class="line">mystring=<span class="stringliteral">&quot;Hello World!  Hello from Fortran!&quot;</span></div><div class="line">icount=<a class="code" href="namespacestrings.html#a1b755da0409a70ccc4c25c1de4e7e009">str_count</a>(mystring,<span class="stringliteral">&quot;Hello&quot;</span>) <span class="comment">! Return a count of &quot;Hello&quot; in mystring</span></div><div class="line"><span class="keyword">write</span>(6,*)<span class="stringliteral">&quot;icount = &quot;</span>,icount</div><div class="line"></div><div class="line"><span class="keyword">end program </span>test</div></div><!-- fragment --><p>Example compile and link to <em><b>static</b></em> library using gfortran:</p>
+<div class="fragment"><div class="line">gfortran -I&lt;prefix&gt;/include -o test.x test.f90 &lt;prefix&gt;/lib/libfstrings.a</div></div><!-- fragment --><p>Note that this does not make the executable 100% static.</p>
+<p>Example compile and link to <em><b>shared object</b></em> library using gfortran:</p>
+<div class="fragment"><div class="line">gfortran -I&lt;prefix&gt;/include -o test.x test.f90 -L&lt;prefix&gt;/lib -lfstrings</div></div><!-- fragment --><p>Note that when compiling and linking to shared object libraries, the library path must be specified in the appropriate environment variable prior to invocation (Linux: <code>LD_LIBRARY_PATH</code>; macOS: <code>DYLD_LIBRARY_PATH</code>). </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
