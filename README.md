@@ -4,7 +4,7 @@
 
 ## Introduction
 
-fortran-strings is a Fortran library and module which contains functions for common string manipulations.  The function ideas originate mainly from Python's built-in string functions.  The functions are accessible by using ``strings`` module in your Fortran code
+fortran-strings is a Fortran library and module which contains functions for common string manipulations.  The function ideas originate mainly from Python's built-in [string](https://docs.python.org/3.7/library/stdtypes.html#string-methods) functions.  The functions are accessible by using ``strings`` module in your Fortran code
 
 ``use strings``
 
