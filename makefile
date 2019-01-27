@@ -26,9 +26,11 @@ test:
 install:
 	-install -d -v -m 755 $(PREFIX)/include
 	-install -d -v -m 755 $(PREFIX)/lib
+	-install -d -v -m 755 $(PREFIX)/share/man/man3
 	-install -v -m 755 strings.mod $(PREFIX)/include/strings.mod
 	-install -v -m 755 libfstrings.a $(PREFIX)/lib/libfstrings.a
 	-install -v -m 755 libfstrings.so $(PREFIX)/lib/libfstrings.so
+	-install -v -m 755 docs/man/man3/strings.3 $(PREFIX)/share/man/man3/strings.3
 
 clean:
 	-rm -f strings.mod strings.o libfstrings.a libfstrings.so
