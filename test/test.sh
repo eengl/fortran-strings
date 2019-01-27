@@ -1,5 +1,11 @@
 #!/bin/sh
 
+if [[ $(uname) == "Darwin" ]] && [[ $1 == "shared" ]]; then
+   DYLD_LIBRARY_PATH=../:$DYLD_LIBRARY_PATH
+elif [[ $(uname) == "Linux" ]] && [[ $1 == "shared" ]]; then
+   LD_LIBRARY_PATH=../:$LD_LIBRARY_PATH
+fi
+
 test/test_${1}.x
 ret=$?
 if [ $ret -eq 0 ]; then
