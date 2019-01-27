@@ -15,7 +15,7 @@ The function names are prefixed with ``str_``.  The following is a list of avail
 * **str_upper** - Convert all letters to uppercase.
 * **str_lower** - Convert all letters to lowercase.
 * **str_split** - Split string based on a character delimiter and return string given by the column number.
-* **str_uniq** - Removed duplicative entries from a \b delimited string.
+* **str_uniq** - Removed duplicative entries from a delimited string.
 * **str_zfill** - Pad a string with zeroes ("0") to specified width. If width is <= input string width, then the original string is returned.
 * **str_center** - Center a string to a specified width.  The default character to fill in the centered string is a blank character.
 * **str_reverse** - Reverse a string.
@@ -34,14 +34,12 @@ Admittedly, my knowledge of automake, autotools, etc is not strong at this time.
 
 ``> [FC=... FFLAGS="..." PREFIX="..."] make``
 
-### Install
-
-``> [sudo] [FC=... FFLAGS="..." PREFIX="..."] make install`` **(sudo access required to install to system area)**
-
 ### Test
 
 Prior to ``make install ``, though optional, it is good practice to test the build with via
 
 ``> make test``
 
+### Install
 
+``> [sudo] [FC=... FFLAGS="..." PREFIX="..."] make install`` **(sudo access required to install to system area)**
