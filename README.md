@@ -30,25 +30,18 @@ All functions return a deferred-length, allocatable character scalar (``characte
 
 Admittedly, my knowledge of automake, autotools, etc is not strong at this time.  The makefile is preconfigured to compile with GNU Fortran (gfortran) ``$FC`` and its appropriate compiler options ``$FFLAGS``.  The default install path is set to ``/usr/local`` via ``$PREFIX``.  To change these make variables, simply edit the makefile or set these variables on the command line prior to the make commands.
 
-### Build
-
-``> [FC=... FFLAGS="..." PREFIX="..."] make``
-
-### Test
-
-Prior to ``make install ``, though optional, it is good practice to test the build with via
-
-``> make test``
-
-### Install
-
-``> [sudo] [FC=... FFLAGS="..." PREFIX="..."] make install`` **(sudo access required to install to system area)**
+```bash
+[FC=... FFLAGS="..." PREFIX="..."] make # Build
+make test # Test
+[sudo] [FC=... FFLAGS="..." PREFIX="..."] make install # Install (sudo access required if install to system area)
+```
 
 ## Usage
 
 This package provides a module file (**``<prefix>/include/strings.mod``**) and both a shared object library (**``<prefix>/lib/libfstrings.so``**) and a static library (**``<prefix>/lib/libfstrings.a``**).  To use this ``fortran-strings`` in your Fortran program, you must use the ``USE`` statement in your main program or procedure source and during compile, you must specify the library of your choice to the compiler/linker.
 
 Example code:
+
 ```fortran
 program test
 use strings
@@ -65,6 +58,7 @@ end program test
 ```
 
 Example compile and link to ***static*** library using gfortran:
+
 ```bash
 gfortran -I<prefix>/include -o test.x test.f90 <prefix>/lib/libfstrings.a
 ```
@@ -72,6 +66,7 @@ gfortran -I<prefix>/include -o test.x test.f90 <prefix>/lib/libfstrings.a
 Note that this does not make the executable 100% static.
 
 Example compile and link to ***shared object*** library using gfortran:
+
 ```bash
 gfortran -I<prefix>/include -o test.x test.f90 -L<prefix>/lib -lfstrings
 ```
