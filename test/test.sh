@@ -1,6 +1,6 @@
 #!/bin/sh
 
-test/test.x
+test/test_${1}.x
 ret=$?
 if [ $ret -eq 0 ]; then
    echo " - Test succeeded."
