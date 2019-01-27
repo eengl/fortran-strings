@@ -1,8 +1,8 @@
 #!/bin/sh
 
-if [[ $(uname) == "Darwin" ]] && [[ $1 == "shared" ]]; then
+if [ "$(uname)" == "Darwin" -a "$1" == "shared" ]; then
    DYLD_LIBRARY_PATH=../:$DYLD_LIBRARY_PATH
-elif [[ $(uname) == "Linux" ]] && [[ $1 == "shared" ]]; then
+elif [ "$(uname)" == "Linux" -a "$1" == "shared" ]; then
    LD_LIBRARY_PATH=../:$LD_LIBRARY_PATH
 fi
 
