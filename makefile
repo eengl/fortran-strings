@@ -1,21 +1,24 @@
 PREFIX ?= /usr/local
 
+FC ?= gfortran
+FFLAGS ?= -O3 -g -fbacktrace -fPIC
+
 .PHONY:	all clean cleanall install test
 
 all:	strings.mod libfstrings.a libfstrings.so
 
 strings.mod:	strings.f90
-	$(FC) -g -fbacktrace -fPIC -c $^
+	$(FC) $(FFLAGS) -c $^
 
 libfstrings.a:	strings.o
 	$(AR) -ruv $@ $^
 
 libfstrings.so:	strings.o
-	$(FC) -I. -fPIC -shared -o $@ $^
+	$(FC) -I. $(FFLAGS) -shared -o $@ $^
 
 test:
-	@$(FC) -I./ -o test/test_shared.x test/test.f90 -L./ -lfstrings
-	@$(FC) -I./ -o test/test_static.x test/test.f90 ./libfstrings.a
+	@$(FC) -I./ $(FFLAGS) -o test/test_shared.x test/test.f90 -L./ -lfstrings
+	@$(FC) -I./ $(FFLAGS) -o test/test_static.x test/test.f90 ./libfstrings.a
 	@test/test.sh shared
 	@test/test.sh static
 
