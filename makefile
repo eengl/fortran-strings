@@ -1,9 +1,15 @@
 PREFIX ?= /usr/local
 
 FC ?= gfortran
-FFLAGS ?= -O3 -g -fbacktrace -fPIC
 
-.PHONY:	all clean cleanall install test
+ifeq ($(FC),"gfortran")
+FFLAGS ?= -O3 -g -fbacktrace -fPIC
+endif
+ifeq ($(FC),"ifort")
+FFLAGS ?= -O3 -g -traceback -fPIC
+endif
+
+.PHONY:	all clean cleanall install install-docs test
 
 all:	strings.mod libfstrings.a libfstrings.so
 
@@ -30,6 +36,8 @@ install:
 	-install -v -m 755 strings.mod $(PREFIX)/include/strings.mod
 	-install -v -m 755 libfstrings.a $(PREFIX)/lib/libfstrings.a
 	-install -v -m 755 libfstrings.so $(PREFIX)/lib/libfstrings.so
+
+install-docs:
 	-install -v -m 755 docs/man/man3/strings.3 $(PREFIX)/share/man/man3/strings.3
 
 clean:
