@@ -39,6 +39,7 @@ module strings
       work(:)=.false.
       len_old=len_trim(old)
       len_new=len_trim(new)
+      strout=""
       do i=1,len_trim(str)
          if(work(i))cycle
          if(str(i:i+(len_old-1)).eq.old)then
@@ -62,6 +63,7 @@ module strings
       character(len=*), intent(in) :: str
       character(len=:), allocatable :: strout
       integer :: i
+      strout=""
       do i=1,len_trim(str)
          if(iachar(str(i:i)).ge.97.and.iachar(str(i:i)).le.122)then
             strout=strout//achar(iachar(str(i:i))-32)
@@ -82,6 +84,7 @@ module strings
       character(len=*), intent(in) :: str
       character(len=:), allocatable :: strout
       integer :: i
+      strout=""
       do i=1,len_trim(str)
          if(iachar(str(i:i)).ge.65.and.iachar(str(i:i)).le.90)then
             strout=strout//achar(iachar(str(i:i))+32)
@@ -111,6 +114,7 @@ module strings
       integer :: i,cnt,lastpos
       cnt=0
       lastpos=0
+      strout=""
       if(col.le.0.or.col.gt.(str_count(str,delim)+1).or.str_count(str,delim).eq.0)then
          strout=str
          return
@@ -153,6 +157,7 @@ module strings
       strlen=len(ctemp)
       ndelims=str_count(ctemp,delim)
       ncols=ndelims+1
+      strout=""
       do n=1,ncols
          col=str_split(ctemp,delim,n)
          if(n.eq.1)then
@@ -189,6 +194,7 @@ module strings
       character(len=*), intent(in) :: str
       integer, intent(in) :: width
       character(len=:), allocatable :: strout
+      strout=""
       if(width.le.len_trim(str))then
          strout=str
       else
@@ -213,6 +219,7 @@ module strings
       character(len=:), allocatable :: strout
       character(len=1) :: local_fillchar
       local_fillchar=" "
+      strout=""
       if(present(fillchar))local_fillchar=fillchar
       if(width.le.len_trim(str))then
          strout=str
@@ -236,6 +243,7 @@ module strings
       character(len=*), intent(in) :: str
       character(len=:), allocatable :: strout
       integer :: i
+      strout=""
       do i=len(str),1,-1
          strout=strout//str(i:i)
       end do
