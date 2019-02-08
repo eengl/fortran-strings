@@ -2,11 +2,11 @@ PREFIX ?= /usr/local
 
 FC ?= gfortran
 
-ifeq ($(FC),"gfortran")
-FFLAGS ?= -O3 -g -fbacktrace -fPIC
+ifeq ($(FC),gfortran)
+	FFLAGS ?= -O3 -g -fbacktrace -fPIC
 endif
-ifeq ($(FC),"ifort")
-FFLAGS ?= -O3 -g -traceback -fPIC
+ifeq ($(FC),ifort)
+	FFLAGS ?= -O3 -g -traceback -fPIC
 endif
 
 .PHONY:	all clean cleanall install install-docs test
