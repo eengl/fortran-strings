@@ -106,24 +106,27 @@ module strings
       character(len=1), intent(in) :: delim
       integer, intent(in) :: col
       character(len=:), allocatable :: strout
-      integer :: i,cnt
+      character(len=:), allocatable :: ctemp
+      character(len=:), allocatable :: cwork
+      integer :: i,cnt,lastpos
       cnt=0
+      lastpos=0
       if(col.le.0.or.col.gt.(str_count(str,delim)+1).or.str_count(str,delim).eq.0)then
          strout=str
          return
       endif
-      do i=1,len_trim(str)
-         if(str(i:i).eq.delim)then
+      ctemp=str//delim
+      do i=1,len_trim(ctemp)
+         if(ctemp(i:i).eq.delim)then
             cnt=cnt+1
             if(cnt.eq.col)then
+               cwork=ctemp(lastpos+1:i-1)
                exit
-            else
-               strout=""
             endif
-         else
-            strout=strout//str(i:i)
+            lastpos=i
          endif
       end do
+      strout=cwork
    end function str_split
 
    ! -------------------------------------------------------------------------------------
