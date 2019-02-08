@@ -57,7 +57,7 @@ write(6,*)"icount = ",icount
 end program test
 ```
 
-Example compile and link to ***static*** library using gfortran:
+Example compile and link to the ***static*** library using gfortran:
 
 ```bash
 gfortran -I<prefix>/include -o test.x test.f90 <prefix>/lib/libfstrings.a
@@ -65,7 +65,7 @@ gfortran -I<prefix>/include -o test.x test.f90 <prefix>/lib/libfstrings.a
 
 Note that this does not make the executable 100% static.
 
-Example compile and link to ***shared object*** library using gfortran:
+Example compile and link to the ***shared object*** library using gfortran:
 
 ```bash
 gfortran -I<prefix>/include -o test.x test.f90 -L<prefix>/lib -lfstrings
