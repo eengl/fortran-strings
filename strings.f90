@@ -138,25 +138,39 @@ module strings
       character(len=*), intent(in) :: str
       character(len=1), intent(in) :: delim
       character(len=:), allocatable :: strout
-      integer :: i,ii,ncols
-      logical(kind=1), allocatable, dimension(:) :: work
-      if(allocated(work))deallocate(work)
-      ncols=str_count(str,delim)+1
-      allocate(work(ncols))
-      work(:)=.false.
-      do i=1,ncols
-         do ii=i+1,ncols
-            if(str_split(str,delim,ii).eq.str_split(str,delim,i))work(ii)=.true.
-         end do
-         if(.not.work(i))then
-            if(len_trim(strout).eq.0)then
-               strout=str_split(str,delim,i)
-            elseif(len_trim(strout).gt.0)then
-               strout=strout//delim//str_split(str,delim,i)
+      character(len=:), allocatable :: ctemp
+      character(len=:), allocatable :: col
+      integer :: n,nn,ncols,ndelims,nuniq,strlen
+      logical(kind=1) :: strfound
+      ncols=0
+      ndelims=0
+      nuniq=0
+      strlen=0
+      ctemp=trim(adjustl(str))
+      strlen=len(ctemp)
+      ndelims=str_count(ctemp,delim)
+      ncols=ndelims+1
+      do n=1,ncols
+         col=str_split(ctemp,delim,n)
+         if(n.eq.1)then
+            strout=col//delim
+            nuniq=len(strout)
+         endif
+         strfound=.false.
+         do nn=1,nuniq
+            if(col.eq.strout(nn:(nn+len(col))-1))then
+               strfound=.true.
+               exit
             endif
+         end do
+         if(.not.strfound)then
+            strout=strout//col//delim
+            nuniq=len(strout)
          endif
       end do
-      if(allocated(work))deallocate(work)
+      if(strout(1:1).eq.delim)strout=strout(2:len(strout))
+      strlen=len(strout)
+      if(strout(strlen:strlen).eq.delim)strout=strout(1:len(strout)-1)
    end function str_uniq
 
    ! -------------------------------------------------------------------------------------
