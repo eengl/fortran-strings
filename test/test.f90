@@ -4,6 +4,7 @@ program test
    
    character(len=:), allocatable :: c1,c2
    integer :: i1
+   logical :: l1
 
    c1="My name is Tony Stark.  Tony Stark is Iron Man."
    !print *,"MYSTRING = ",c1
@@ -59,5 +60,13 @@ program test
    !print *,"MYSTRING = ",c1
    c2=str_reverse(c1)
    !print *,"STR_REVERSE = ",":",c2,":"
+
+   c1="Ironman,Thor,Thanos,Black Panther,Winter Soldier"
+   l1=str_test(c1,"Thor") ! TRUE
+   !print *,l1
+   if(.not.l1)call exit(1)
+   l1=str_test(c1,"Vision") ! FALSE
+   !print *,l1
+   if(l1)call exit(1)
 
 end program test

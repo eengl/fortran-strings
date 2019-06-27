@@ -19,8 +19,9 @@ The function names are prefixed with ``str_``.  The following is a list of avail
 * **str_zfill** - Pad a string with zeroes ("0") to specified width. If width is <= input string width, then the original string is returned.
 * **str_center** - Center a string to a specified width.  The default character to fill in the centered string is a blank character.
 * **str_reverse** - Reverse a string.
+* **str_test** - Return .true. is a substring is found in a string, .false. otherwise.
 
-All functions return a deferred-length, allocatable character scalar (``character(len=:), allocatable``) with the exception of **``str_count``** which returns an integer.
+All functions return a deferred-length, allocatable character scalar (``character(len=:), allocatable``) with the exception of **``str_count``** which returns an integer and **``str_test``** which returns a logical.
 
 ## Requirements
 

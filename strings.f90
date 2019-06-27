@@ -249,4 +249,23 @@ module strings
       end do
    end function str_reverse
 
+   ! -------------------------------------------------------------------------------------
+   ! Function: str_test
+   !> @brief Return .true. if substr is in str, .false. otherwise
+   !> @param[in] str - string to work on
+   !> @param[in] substr - string to search for in str
+   !> @return .true. or .false.
+   ! -------------------------------------------------------------------------------------
+   function str_test(str,substr) result(strtest)
+      implicit none
+      character(len=*), intent(in) :: str
+      character(len=*), intent(in) :: substr
+      logical :: strtest
+      if(str_count(str,substr).eq.0)then
+         strtest=.false.
+      elseif(str_count(str,substr).gt.0)then
+         strtest=.true.
+      endif
+   end function str_test
+
 end module strings
