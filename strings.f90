@@ -7,16 +7,26 @@ module strings
    !> @brief Count the occurrences of a substring in a string.
    !> @param[in] str - string to count from
    !> @param[in] substr - substring to count
+   !> @param[in] match_case - use case sensitivity (.true.) or not (.false. [DEFAULT]) \b [OPTIONAL]
    !> @return count of \b substr in \b str
    ! -------------------------------------------------------------------------------------
-   function str_count(str,substr) result(count)
+   function str_count(str,substr,match_case) result(count)
       implicit none
       character(len=*), intent(in) :: str
       character(len=*), intent(in) :: substr
+      logical, intent(in), optional :: match_case
+      character(len=:), allocatable :: strtmp,substrtmp
       integer :: i,count
+      if(present(match_case).and.match_case)then
+         strtmp=str
+         substrtmp=substr
+      else
+         strtmp=str_lower(str)
+         substrtmp=str_lower(substr)
+      endif
       count=0         
-      do i=1,len_trim(str)
-         if(str(i:i+(len_trim(substr)-1)).eq.substr)count=count+1
+      do i=1,len_trim(strtmp)
+         if(strtmp(i:i+(len_trim(substrtmp)-1)).eq.substrtmp)count=count+1
       end do
    end function str_count
 
@@ -208,7 +218,7 @@ module strings
    !>        centered string is a blank character.
    !> @param[in] str - string to work on
    !> @param[in] width - width of centered string
-   !> @param[in] fillchar - character to fill centered string. \b[OPTIONAL]
+   !> @param[in] fillchar - character to fill centered string. \b [OPTIONAL]
    !> @return centered string
    ! -------------------------------------------------------------------------------------
    function str_center(str,width,fillchar) result(strout)
@@ -254,18 +264,50 @@ module strings
    !> @brief Return .true. if substr is in str, .false. otherwise
    !> @param[in] str - string to work on
    !> @param[in] substr - string to search for in str
+   !> @param[in] match_case - use case sensitivity (.true.) or not (.false. [DEFAULT]) \b [OPTIONAL]
    !> @return .true. or .false.
    ! -------------------------------------------------------------------------------------
-   function str_test(str,substr) result(strtest)
+   function str_test(str,substr,match_case) result(strtest)
       implicit none
       character(len=*), intent(in) :: str
       character(len=*), intent(in) :: substr
+      logical, intent(in), optional :: match_case
       logical :: strtest
-      if(str_count(str,substr).eq.0)then
+      integer :: cnt
+      cnt=0
+      if(present(match_case))then
+         cnt=str_count(str,substr,match_case=match_case)
+      else
+         cnt=str_count(str,substr)
+      endif
+      if(cnt.eq.0)then
          strtest=.false.
-      elseif(str_count(str,substr).gt.0)then
+      elseif(cnt.gt.0)then
          strtest=.true.
       endif
    end function str_test
+
+   ! -------------------------------------------------------------------------------------
+   ! Function: str_swapcase
+   !> @brief Return str with case of letters swapped
+   !> @param[in] str - input string
+   ! -------------------------------------------------------------------------------------
+   function str_swapcase(str) result(strout)
+      implicit none
+      character(len=*), intent(in) :: str
+      character(len=:), allocatable :: strout
+      integer :: i,ic
+      strout=""
+      do i=1,len(str)
+         ic=iachar(str(i:i))
+         if(ic.ge.65.and.ic.le.90)then
+            strout=strout//achar(ic+32)
+         elseif(ic.ge.97.and.ic.le.122)then
+            strout=strout//achar(ic-32)
+         else
+            strout=strout//achar(ic)
+         endif
+      end do
+   end function str_swapcase
 
 end module strings
