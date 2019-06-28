@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">fortran-strings
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
    <div id="projectbrief">Fortran library of functions for common string manipulations</div>
   </td>
@@ -83,8 +83,10 @@ $(function() {
 <li><b>str_zfill</b> - Pad a string with zeroes ("0") to specified width. If width is &lt;= input string width, then the original string is returned.</li>
 <li><b>str_center</b> - Center a string to a specified width. The default character to fill in the centered string is a blank character.</li>
 <li><b>str_reverse</b> - Reverse a string.</li>
+<li><b>str_test</b> - Return .true. is a substring is found in a string, .false. otherwise.</li>
+<li><b>str_swapcase</b> - Swap the case of letters in a string.</li>
 </ul>
-<p>All functions return a deferred-length, allocatable character scalar (<code>character(len=:), allocatable</code>) with the exception of **<code>str_count</code>** which returns an integer.</p>
+<p>All functions return a deferred-length, allocatable character scalar (<code>character(len=:), allocatable</code>) with the exception of **<code>str_count</code>** which returns an integer and **<code>str_test</code>** which returns a logical.</p>
 <h2>Requirements</h2>
 <ul>
 <li>Fortran compiler (tested with gfortran 4.8.4 and later)</li>
@@ -94,9 +96,9 @@ $(function() {
 <div class="fragment"><div class="line">[FC=... FFLAGS=&quot;...&quot; PREFIX=&quot;...&quot;] make # Build</div><div class="line">make test # Test</div><div class="line">[sudo] [FC=... FFLAGS=&quot;...&quot; PREFIX=&quot;...&quot;] make install # Install (sudo access required if install to system area)</div></div><!-- fragment --><h2>Usage</h2>
 <p>This package provides a module file (**<code>&lt;prefix&gt;/include/strings.mod</code>**) and both a shared object library (**<code>&lt;prefix&gt;/lib/libfstrings.so</code>**) and a static library (**<code>&lt;prefix&gt;/lib/libfstrings.a</code>**). To use this <code>fortran-strings</code> in your Fortran program, you must use the <code>USE</code> statement in your main program or procedure source and during compile, you must specify the library of your choice to the compiler/linker.</p>
 <p>Example code:</p>
-<div class="fragment"><div class="line"><span class="keyword">program</span> test</div><div class="line"><span class="keywordtype">use </span><a class="code" href="namespacestrings.html">strings</a></div><div class="line"><span class="keywordtype">implicit none</span></div><div class="line"></div><div class="line"><span class="keywordtype">character(len=:)</span>, <span class="keywordtype">allocatable</span> :: mystring</div><div class="line"><span class="keywordtype">integer</span> :: icount</div><div class="line"></div><div class="line">mystring=<span class="stringliteral">&quot;Hello World!  Hello from Fortran!&quot;</span></div><div class="line">icount=<a class="code" href="namespacestrings.html#a1b755da0409a70ccc4c25c1de4e7e009">str_count</a>(mystring,<span class="stringliteral">&quot;Hello&quot;</span>) <span class="comment">! Return a count of &quot;Hello&quot; in mystring</span></div><div class="line"><span class="keyword">write</span>(6,*)<span class="stringliteral">&quot;icount = &quot;</span>,icount</div><div class="line"></div><div class="line"><span class="keyword">end program </span>test</div></div><!-- fragment --><p>Example compile and link to <em><b>static</b></em> library using gfortran:</p>
+<div class="fragment"><div class="line"><span class="keyword">program</span> test</div><div class="line"><span class="keywordtype">use </span><a class="code" href="namespacestrings.html">strings</a></div><div class="line"><span class="keywordtype">implicit none</span></div><div class="line"></div><div class="line"><span class="keywordtype">character(len=:)</span>, <span class="keywordtype">allocatable</span> :: mystring</div><div class="line"><span class="keywordtype">integer</span> :: icount</div><div class="line"></div><div class="line">mystring=<span class="stringliteral">&quot;Hello World!  Hello from Fortran!&quot;</span></div><div class="line">icount=<a class="code" href="namespacestrings.html#a4c059bd22bb1423242489b8b421f6119">str_count</a>(mystring,<span class="stringliteral">&quot;Hello&quot;</span>) <span class="comment">! Return a count of &quot;Hello&quot; in mystring</span></div><div class="line"><span class="keyword">write</span>(6,*)<span class="stringliteral">&quot;icount = &quot;</span>,icount</div><div class="line"></div><div class="line"><span class="keyword">end program </span>test</div></div><!-- fragment --><p>Example compile and link to the <em><b>static</b></em> library using gfortran:</p>
 <div class="fragment"><div class="line">gfortran -I&lt;prefix&gt;/include -o test.x test.f90 &lt;prefix&gt;/lib/libfstrings.a</div></div><!-- fragment --><p>Note that this does not make the executable 100% static.</p>
-<p>Example compile and link to <em><b>shared object</b></em> library using gfortran:</p>
+<p>Example compile and link to the <em><b>shared object</b></em> library using gfortran:</p>
 <div class="fragment"><div class="line">gfortran -I&lt;prefix&gt;/include -o test.x test.f90 -L&lt;prefix&gt;/lib -lfstrings</div></div><!-- fragment --><p>Note that when compiling and linking to shared object libraries, the library path must be specified in the appropriate environment variable prior to invocation (Linux: <code>LD_LIBRARY_PATH</code>; macOS: <code>DYLD_LIBRARY_PATH</code>). </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
