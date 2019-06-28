@@ -7,9 +7,14 @@ program test
    logical :: l1
 
    c1="My name is Tony Stark.  Tony Stark is Iron Man."
-   !print *,"MYSTRING = ",c1
    i1=str_count(c1,"Tony")
-   !print *,"COUNT OF SPACES = ",i1
+   if(i1.ne.2)call exit(1)
+   i1=str_count(c1,"Tony",match_case=.true.)
+   if(i1.ne.2)call exit(1)
+   i1=str_count(c1,"TONY",match_case=.false.)
+   if(i1.ne.2)call exit(1)
+   i1=str_count(c1,"tony",match_case=.true.)
+   if(i1.ne.0)call exit(1)
 
    c1=str_replace(c1,"Tony Stark","Steve Rogers")
    !print *,"MYSTRING = ",c1
@@ -68,5 +73,12 @@ program test
    l1=str_test(c1,"Vision") ! FALSE
    !print *,l1
    if(l1)call exit(1)
+   l1=str_test(c1,"THOR",match_case=.true.) ! False
+   if(l1)call exit(1)
+   l1=str_test(c1,"THOR",match_case=.false.) ! True
+   if(.not.l1)call exit(1)
+
+   c1="Ironman,Thor,Thanos,Black Panther,Winter Soldier"
+   if(str_swapcase(str_swapcase(c1)).ne.c1)call exit(1)
 
 end program test
