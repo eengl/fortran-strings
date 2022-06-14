@@ -44,15 +44,17 @@ module strings
       character(len=*), intent(in) :: old
       character(len=*), intent(in) :: new
       character(len=:), allocatable :: strout
-      integer :: i,len_old,len_new
+      integer :: i,iend,len_str,len_old,len_new
       logical(kind=1), dimension(len_trim(str)) :: work
       work(:)=.false.
+      len_str=len_trim(str)
       len_old=len_trim(old)
       len_new=len_trim(new)
       strout=""
-      do i=1,len_trim(str)
+      do i=1,len_str
          if(work(i))cycle
-         if(str(i:i+(len_old-1)).eq.old)then
+         iend=min(len_str,i+(len_old-1))
+         if(str(i:iend).eq.old)then
             strout=strout//new
             work(i:i+(len_old-1))=.true.
          else
