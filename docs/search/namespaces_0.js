@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['strings',['strings',['../namespacestrings.html',1,'']]]
+  ['strings_0',['strings',['../namespacestrings.html',1,'']]]
 ];
