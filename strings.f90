@@ -26,7 +26,7 @@ module strings
       endif
       count=0         
       do i=1,len_trim(strtmp)
-         if(strtmp(i:i+(len_trim(substrtmp)-1)).eq.substrtmp)count=count+1
+         if(strtmp(i:min(len_trim(strtmp),i+(len_trim(substrtmp)-1))).eq.substrtmp)count=count+1
       end do
    end function str_count
 
@@ -44,7 +44,7 @@ module strings
       character(len=*), intent(in) :: old
       character(len=*), intent(in) :: new
       character(len=:), allocatable :: strout
-      integer :: i,iend,len_str,len_old,len_new
+      integer :: i,len_str,len_old,len_new
       logical(kind=1), dimension(len_trim(str)) :: work
       work(:)=.false.
       len_str=len_trim(str)
@@ -53,8 +53,7 @@ module strings
       strout=""
       do i=1,len_str
          if(work(i))cycle
-         iend=min(len_str,i+(len_old-1))
-         if(str(i:iend).eq.old)then
+         if(str(i:min(len_str,i+(len_old-1))).eq.old)then
             strout=strout//new
             work(i:i+(len_old-1))=.true.
          else
@@ -178,7 +177,7 @@ module strings
          endif
          strfound=.false.
          do nn=1,nuniq
-            if(col.eq.strout(nn:(nn+len(col))-1))then
+            if(col.eq.strout(nn:min(len_trim(strout),(nn+len(col))-1)))then
                strfound=.true.
                exit
             endif
