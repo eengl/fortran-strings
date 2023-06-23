@@ -25,10 +25,6 @@ jobs:
         compiler: ${{ matrix.toolchain.compiler }}
         version: ${{ matrix.toolchain.version }}
         
-    - run: ${{ env.FC }} --version
-      env:
-        FC: ${{ steps.setup-fortran.outputs.fc }}
-        
     - name: build and test
       run: |
         cd fortran-strings
