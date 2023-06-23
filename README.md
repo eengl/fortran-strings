@@ -1,4 +1,4 @@
-![Status](https://github.com/eengl/fortran-strings/workflows/build_linux.yml/badge.svg)
+![Status](https://github.com/eengl/fortran-strings/actions/workflows/build_linux.yml/badge.svg)
 
 # fortran-strings
 
