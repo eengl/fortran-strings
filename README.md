@@ -1,3 +1,5 @@
+![Status](https://github.com/eengl/fortran-strings/workflows/build_linux.yml/badge.svg)
+
 # fortran-strings
 
 ## Introduction
