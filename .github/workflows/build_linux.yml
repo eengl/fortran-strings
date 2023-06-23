@@ -7,6 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        sharedlibs: [ON, OFF]
         toolchain:
           - {compiler: gcc, version: 10}
           - {compiler: gcc, version: 11}
@@ -31,6 +32,6 @@ jobs:
         cd fortran-strings
         mkdir build
         cd build
-        cmake ..
-        make
+        cmake -DBUILD_SHARED_LIBS=${{ matrix.sharedlibs }} ..
+        make VERBOSE=1
         make test
