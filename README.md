@@ -1,7 +1,5 @@
 # fortran-strings
 
-[![Build Status](https://travis-ci.com/eengl/fortran-strings.svg?branch=master)](https://travis-ci.com/eengl/fortran-strings)
-
 ## Introduction
 
 fortran-strings is a Fortran library and module which contains functions for common string manipulations.  The function ideas originate mainly from Python's built-in [string](https://docs.python.org/3.7/library/stdtypes.html#string-methods) functions.  The functions are accessible by using ``strings`` module in your Fortran code
@@ -28,14 +26,15 @@ All functions return a deferred-length, allocatable character scalar (``characte
 
 * Fortran compiler (tested with gfortran 4.8.4 and later)
 
-## Build and Installation
-
-Admittedly, my knowledge of automake, autotools, etc is not strong at this time.  The makefile is preconfigured to compile with GNU Fortran (gfortran) ``$FC`` and its appropriate compiler options ``$FFLAGS``.  The default install path is set to ``/usr/local`` via ``$PREFIX``.  To change these make variables, simply edit the makefile or set these variables on the command line prior to the make commands.
+## Installation
 
 ```bash
-[FC=... FFLAGS="..." PREFIX="..."] make # Build
-make test # Test
-[sudo] [FC=... FFLAGS="..." PREFIX="..."] make install # Install (sudo access required if install to system area)
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=/path/to/install /path/to/fortran-strings
+make
+make test
+make install
 ```
 
 ## Usage
