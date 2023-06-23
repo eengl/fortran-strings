@@ -17,10 +17,18 @@ jobs:
     - name: checkout-fortran-strings
       uses: actions/checkout@v3
       with:
+        path: fortran-strings
+        
+    - name: setup-fortran
+      uses: awvwgk/setup-fortran@v1
+      with:
         compiler: ${{ matrix.toolchain.compiler }}
         version: ${{ matrix.toolchain.version }}
-        path: fortran-strings
-
+        
+    - run: ${{ env.FC }} --version
+      env:
+        FC: ${{ steps.setup-fortran.outputs.fc }}
+        
     - name: build and test
       run: |
         cd fortran-strings
