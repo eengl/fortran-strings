@@ -5,15 +5,20 @@ on: [push, pull_request]
 jobs:
   build-linux:
     runs-on: ubuntu-latest
-    #env:
-    #strategy:
-    #  matrix:
+    strategy:
+      matrix:
+        toolchain:
+          - {compiler: gcc, version: 11}
+          - {compiler: gcc, version: 12}
+          - {compiler: gcc, version: 13}
    
     steps:
 
     - name: checkout-fortran-strings
       uses: actions/checkout@v3
       with:
+        compiler: ${{ matrix.toolchain.compiler }}
+        version: ${{ matrix.toolchain.version }}
         path: fortran-strings
 
     - name: build and test
