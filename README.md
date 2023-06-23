@@ -22,8 +22,11 @@ The function names are prefixed with ``str_``.  The following is a list of avail
 
 All functions return a deferred-length, allocatable character scalar (``character(len=:), allocatable``) with the exception of **``str_count``** which returns an integer and **``str_test``** which returns a logical.
 
+For more detailed documentation, see https://eengl.github.io/fortran-strings/
+
 ## Requirements
 
+* CMake v3.15+
 * Fortran compiler (tested with gfortran 4.8.4 and later)
 
 ## Installation
@@ -36,40 +39,3 @@ make
 make test
 make install
 ```
-
-## Usage
-
-This package provides a module file (**``<prefix>/include/strings.mod``**) and both a shared object library (**``<prefix>/lib/libfstrings.so``**) and a static library (**``<prefix>/lib/libfstrings.a``**).  To use this ``fortran-strings`` in your Fortran program, you must use the ``USE`` statement in your main program or procedure source and during compile, you must specify the library of your choice to the compiler/linker.
-
-Example code:
-
-```fortran
-program test
-use strings
-implicit none
-
-character(len=:), allocatable :: mystring
-integer :: icount
-
-mystring="Hello World!  Hello from Fortran!"
-icount=str_count(mystring,"Hello") ! Return a count of "Hello" in mystring
-write(6,*)"icount = ",icount
-
-end program test
-```
-
-Example compile and link to the ***static*** library using gfortran:
-
-```bash
-gfortran -I<prefix>/include -o test.x test.f90 <prefix>/lib/libfstrings.a
-```
-
-Note that this does not make the executable 100% static.
-
-Example compile and link to the ***shared object*** library using gfortran:
-
-```bash
-gfortran -I<prefix>/include -o test.x test.f90 -L<prefix>/lib -lfstrings
-```
-
-Note that when compiling and linking to shared object libraries, the library path must be specified in the appropriate environment variable prior to invocation (Linux: ``LD_LIBRARY_PATH``; macOS: ``DYLD_LIBRARY_PATH``).
