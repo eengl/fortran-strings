@@ -16,6 +16,9 @@ include(GNUInstallDirs)
 OPTION(ENABLE_DOCS "Enable generation of doxygen-based documentation" OFF)
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 
+# Turn on position independent code
+SET(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
 # Check build type.
 if(NOT CMAKE_BUILD_TYPE MATCHES "^(Debug|Release|RelWithDebInfo|MinSizeRel)$")
   message(STATUS "Setting build type to 'Release' as none was specified.")
