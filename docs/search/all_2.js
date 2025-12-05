@@ -11,6 +11,6 @@ var searchData=
   ['str_5funiq_8',['str_uniq',['../namespacestrings.html#a8a6ee3280b88b0c63aa79b8095bd20ef',1,'strings']]],
   ['str_5fupper_9',['str_upper',['../namespacestrings.html#afd1c79d1ba7dfe3ca9c77cab4f936c99',1,'strings']]],
   ['str_5fzfill_10',['str_zfill',['../namespacestrings.html#af7c5fa6249abe3060899aab8ce88686e',1,'strings']]],
-  ['strings_11',['strings',['../namespacestrings.html',1,'']]],
+  ['strings_11',['strings',['../index.html',1,'fortran-strings'],['../namespacestrings.html',1,'strings']]],
   ['strings_2ef90_12',['strings.f90',['../strings_8f90.html',1,'']]]
 ];

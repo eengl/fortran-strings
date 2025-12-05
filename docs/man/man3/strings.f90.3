@@ -1,0 +1,66 @@
+.TH "/Users/ericengle/Repos/GitHub/fortran-strings/src/strings.f90" 3 "Version 1.3.0" "fortran-strings" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/Users/ericengle/Repos/GitHub/fortran-strings/src/strings.f90
+.SH SYNOPSIS
+.br
+.PP
+.SS "Modules"
+
+.in +1c
+.ti -1c
+.RI "module \fBstrings\fP"
+.br
+.in -1c
+.SS "Functions/Subroutines"
+
+.in +1c
+.ti -1c
+.RI "integer function \fBstrings::str_count\fP (str, substr, match_case)"
+.br
+.RI "Count the occurrences of a substring in a string\&. "
+.ti -1c
+.RI "character(len=:) function, allocatable \fBstrings::str_replace\fP (str, old, new)"
+.br
+.RI "Replace a substring with another substring within a parent string\&. "
+.ti -1c
+.RI "character(len=:) function, allocatable \fBstrings::str_upper\fP (str)"
+.br
+.RI "Convert all letters to uppercase\&. "
+.ti -1c
+.RI "character(len=:) function, allocatable \fBstrings::str_lower\fP (str)"
+.br
+.RI "Convert all letters to lowercase\&. "
+.ti -1c
+.RI "character(len=:) function, allocatable \fBstrings::str_split\fP (str, delim, col)"
+.br
+.RI "Split string based on a character delimiter and return string given by the column number\&. "
+.ti -1c
+.RI "character(len=:) function, allocatable \fBstrings::str_uniq\fP (str, delim)"
+.br
+.RI "Removed duplicative entries from a \fBdelimited\fP string\&. "
+.ti -1c
+.RI "character(len=:) function, allocatable \fBstrings::str_zfill\fP (str, width)"
+.br
+.RI "Pad a string with zeroes ("0") to specified width\&. If width is <= input string width, then the original string is returned\&. "
+.ti -1c
+.RI "character(len=:) function, allocatable \fBstrings::str_center\fP (str, width, fillchar)"
+.br
+.RI "Center a string to a specified width\&. The default character to fill in the centered string is a blank character\&. "
+.ti -1c
+.RI "character(len=:) function, allocatable \fBstrings::str_reverse\fP (str)"
+.br
+.RI "Reverse a string\&. "
+.ti -1c
+.RI "logical function \fBstrings::str_test\fP (str, substr, match_case)"
+.br
+.RI "Return \&.true\&. if substr is in str, \&.false\&. otherwise\&. "
+.ti -1c
+.RI "character(len=:) function, allocatable \fBstrings::str_swapcase\fP (str)"
+.br
+.RI "Return str with case of letters swapped\&. "
+.in -1c
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for fortran-strings from the source code\&.

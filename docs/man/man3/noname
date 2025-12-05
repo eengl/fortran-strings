@@ -1,0 +1,9 @@
+.TH "" 3 "Version 1.3.0" "fortran-strings" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src strings\&.f90 
+.PP
+tests test_fortran_strings\&.f90 
+.PP
+

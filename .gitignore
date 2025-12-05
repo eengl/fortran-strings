@@ -38,3 +38,5 @@ build/
 
 # Journaled file system hidden files
 .DS_Store
+
+docs/doxygen/doxygen.config

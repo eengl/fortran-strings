@@ -1,0 +1,256 @@
+.TH "strings" 3 "Version 1.3.0" "fortran-strings" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+strings
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions/Subroutines"
+
+.in +1c
+.ti -1c
+.RI "integer function \fBstr_count\fP (str, substr, match_case)"
+.br
+.RI "Count the occurrences of a substring in a string\&. "
+.ti -1c
+.RI "character(len=:) function, allocatable \fBstr_replace\fP (str, old, new)"
+.br
+.RI "Replace a substring with another substring within a parent string\&. "
+.ti -1c
+.RI "character(len=:) function, allocatable \fBstr_upper\fP (str)"
+.br
+.RI "Convert all letters to uppercase\&. "
+.ti -1c
+.RI "character(len=:) function, allocatable \fBstr_lower\fP (str)"
+.br
+.RI "Convert all letters to lowercase\&. "
+.ti -1c
+.RI "character(len=:) function, allocatable \fBstr_split\fP (str, delim, col)"
+.br
+.RI "Split string based on a character delimiter and return string given by the column number\&. "
+.ti -1c
+.RI "character(len=:) function, allocatable \fBstr_uniq\fP (str, delim)"
+.br
+.RI "Removed duplicative entries from a \fBdelimited\fP string\&. "
+.ti -1c
+.RI "character(len=:) function, allocatable \fBstr_zfill\fP (str, width)"
+.br
+.RI "Pad a string with zeroes ("0") to specified width\&. If width is <= input string width, then the original string is returned\&. "
+.ti -1c
+.RI "character(len=:) function, allocatable \fBstr_center\fP (str, width, fillchar)"
+.br
+.RI "Center a string to a specified width\&. The default character to fill in the centered string is a blank character\&. "
+.ti -1c
+.RI "character(len=:) function, allocatable \fBstr_reverse\fP (str)"
+.br
+.RI "Reverse a string\&. "
+.ti -1c
+.RI "logical function \fBstr_test\fP (str, substr, match_case)"
+.br
+.RI "Return \&.true\&. if substr is in str, \&.false\&. otherwise\&. "
+.ti -1c
+.RI "character(len=:) function, allocatable \fBstr_swapcase\fP (str)"
+.br
+.RI "Return str with case of letters swapped\&. "
+.in -1c
+.SH "Function/Subroutine Documentation"
+.PP 
+.SS "character(len=:) function, allocatable strings::str_center (character(len=*), intent(in) str, integer, intent(in) width, character(len=1), intent(in), optional fillchar)"
+
+.PP
+Center a string to a specified width\&. The default character to fill in the centered string is a blank character\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIstr\fP - string to work on 
+.br
+\fIwidth\fP - width of centered string 
+.br
+\fIfillchar\fP - character to fill centered string\&. \fB\fP[OPTIONAL] 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+centered string 
+.RE
+.PP
+
+.SS "integer function strings::str_count (character(len=*), intent(in) str, character(len=*), intent(in) substr, logical, intent(in), optional match_case)"
+
+.PP
+Count the occurrences of a substring in a string\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIstr\fP - string to count from 
+.br
+\fIsubstr\fP - substring to count 
+.br
+\fImatch_case\fP - use case sensitivity (\&.true\&.) or not (\&.false\&. [DEFAULT]) \fB\fP[OPTIONAL] 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+count of \fBsubstr\fP in \fBstr\fP 
+.RE
+.PP
+
+.SS "character(len=:) function, allocatable strings::str_lower (character(len=*), intent(in) str)"
+
+.PP
+Convert all letters to lowercase\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIstr\fP - string to work on 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+modified string with all letters converted to lowercase\&. 
+.RE
+.PP
+
+.SS "character(len=:) function, allocatable strings::str_replace (character(len=*), intent(in) str, character(len=*), intent(in) old, character(len=*), intent(in) new)"
+
+.PP
+Replace a substring with another substring within a parent string\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIstr\fP - string to work on 
+.br
+\fIold\fP - string to replace 
+.br
+\fInew\fP - string to substritute from \fBold\fP\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+modified string where occurrences of \fBold\fP replaces with \fBnew\fP 
+.RE
+.PP
+
+.SS "character(len=:) function, allocatable strings::str_reverse (character(len=*), intent(in) str)"
+
+.PP
+Reverse a string\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIstr\fP - string to work on 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+string reverse of \fBstr\fP 
+.RE
+.PP
+
+.SS "character(len=:) function, allocatable strings::str_split (character(len=*), intent(in) str, character(len=1), intent(in) delim, integer, intent(in) col)"
+
+.PP
+Split string based on a character delimiter and return string given by the column number\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIstr\fP - string to work on 
+.br
+\fIdelim\fP - character delimiter 
+.br
+\fIcol\fP - delimited column to return 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+string 
+.RE
+.PP
+
+.SS "character(len=:) function, allocatable strings::str_swapcase (character(len=*), intent(in) str)"
+
+.PP
+Return str with case of letters swapped\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIstr\fP - input string 
+.RE
+.PP
+
+.SS "logical function strings::str_test (character(len=*), intent(in) str, character(len=*), intent(in) substr, logical, intent(in), optional match_case)"
+
+.PP
+Return \&.true\&. if substr is in str, \&.false\&. otherwise\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIstr\fP - string to work on 
+.br
+\fIsubstr\fP - string to search for in str 
+.br
+\fImatch_case\fP - use case sensitivity (\&.true\&.) or not (\&.false\&. [DEFAULT]) \fB\fP[OPTIONAL] 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\&.true\&. or \&.false\&. 
+.RE
+.PP
+
+.SS "character(len=:) function, allocatable strings::str_uniq (character(len=*), intent(in) str, character(len=1), intent(in) delim)"
+
+.PP
+Removed duplicative entries from a \fBdelimited\fP string\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIstr\fP - string to work on 
+.br
+\fIdelim\fP - character delimiter 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+modified string 
+.RE
+.PP
+
+.SS "character(len=:) function, allocatable strings::str_upper (character(len=*), intent(in) str)"
+
+.PP
+Convert all letters to uppercase\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIstr\fP - string to work on 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+modified string with all letters converted to uppercase\&. 
+.RE
+.PP
+
+.SS "character(len=:) function, allocatable strings::str_zfill (character(len=*), intent(in) str, integer, intent(in) width)"
+
+.PP
+Pad a string with zeroes ("0") to specified width\&. If width is <= input string width, then the original string is returned\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIstr\fP - string to work on 
+.br
+\fIwidth\fP - width of padded string 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+modified string 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for fortran-strings from the source code\&.
