@@ -1,7 +1,7 @@
 module strings
-   
+
    contains
-   
+
    ! -------------------------------------------------------------------------------------
    ! Function: str_count
    !> @brief Count the occurrences of a substring in a string.
@@ -24,7 +24,7 @@ module strings
          strtmp=str_lower(str)
          substrtmp=str_lower(substr)
       endif
-      count=0         
+      count=0
       do i=1,len_trim(strtmp)
          if(strtmp(i:min(len_trim(strtmp),i+(len_trim(substrtmp)-1))).eq.substrtmp)count=count+1
       end do
@@ -146,7 +146,7 @@ module strings
 
    ! -------------------------------------------------------------------------------------
    ! Function: str_uniq
-   !> @brief Removed duplicative entries from a \b delimited string. 
+   !> @brief Removed duplicative entries from a \b delimited string.
    !> @param[in] str - string to work on
    !> @param[in] delim - character delimiter
    !> @return modified string
@@ -157,39 +157,35 @@ module strings
       character(len=1), intent(in) :: delim
       character(len=:), allocatable :: strout
       character(len=:), allocatable :: ctemp
-      character(len=:), allocatable :: col
-      integer :: n,nn,ncols,ndelims,nuniq,strlen
-      logical(kind=1) :: strfound
-      ncols=0
-      ndelims=0
+      character(len=:), allocatable :: col,ucol
+      integer :: n,nn
+      integer :: nmatch,nuniq
+      nmatch=0
       nuniq=0
-      strlen=0
-      ctemp=trim(adjustl(str))
-      strlen=len(ctemp)
-      ndelims=str_count(ctemp,delim)
-      ncols=ndelims+1
       strout=""
+      ! Work with a copy of str
+      ctemp=trim(adjustl(str))
+      ! Remove any leading or trailing delimiters
+      if(ctemp(1:1).eq.delim) ctemp=ctemp(2:len(ctemp))
+      if(ctemp(len(ctemp):len(ctemp)).eq.demlin) ctemp=ctemp(1:len(ctemp)-1)
+      ncols=str_count(ctemp,delim)+1
       do n=1,ncols
          col=str_split(ctemp,delim,n)
          if(n.eq.1)then
-            strout=col//delim
-            nuniq=len(strout)
+            strout=strout//col
          endif
-         strfound=.false.
+         nuniq=str_count(strout,delim)+1
+         nmatch=0
          do nn=1,nuniq
-            if(col.eq.strout(nn:min(len_trim(strout),(nn+len(col))-1)))then
-               strfound=.true.
-               exit
+            ucol=str_split(strout,delim,nn)
+            if(col.eq.ucol)then
+               nmatch=nmatch+1
             endif
          end do
-         if(.not.strfound)then
-            strout=strout//col//delim
-            nuniq=len(strout)
+         if(nmatch.eq.0)then
+            strout=strout//delim//col
          endif
       end do
-      if(strout(1:1).eq.delim)strout=strout(2:len(strout))
-      strlen=len(strout)
-      if(strout(strlen:strlen).eq.delim)strout=strout(1:len(strout)-1)
    end function str_uniq
 
    ! -------------------------------------------------------------------------------------
