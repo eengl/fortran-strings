@@ -168,7 +168,7 @@ module strings
       ctemp=trim(adjustl(str))
       ! Remove any leading or trailing delimiters
       if(ctemp(1:1).eq.delim) ctemp=ctemp(2:len(ctemp))
-      if(ctemp(len(ctemp):len(ctemp)).eq.demlin) ctemp=ctemp(1:len(ctemp)-1)
+      if(ctemp(len(ctemp):len(ctemp)).eq.delim) ctemp=ctemp(1:len(ctemp)-1)
       ncols=str_count(ctemp,delim)+1
       do n=1,ncols
          col=str_split(ctemp,delim,n)
