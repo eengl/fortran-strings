@@ -81,4 +81,7 @@ program test
    c1="Ironman,Thor,Thanos,Black Panther,Winter Soldier"
    if(str_swapcase(str_swapcase(c1)).ne.c1)call exit(1)
 
+   c1="accessg,accesse,aigfs,ecmwfd,ecmwfe,gefs,gefs"
+   if(str_uniq(c1,",").ne.c1)call exit(1)
+
 end program test
