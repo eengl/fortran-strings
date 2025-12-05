@@ -159,7 +159,8 @@ module strings
       character(len=:), allocatable :: ctemp
       character(len=:), allocatable :: col,ucol
       integer :: n,nn
-      integer :: nmatch,nuniq
+      integer :: ncols,nmatch,nuniq
+      ncols=0
       nmatch=0
       nuniq=0
       strout=""
